@@ -9,13 +9,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace FitnessCenter.Domain.Migrations
+namespace FitnessCenter.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20171205154232_intitalmigration")]
-    partial class intitalmigration
+    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

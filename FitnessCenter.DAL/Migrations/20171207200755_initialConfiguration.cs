@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace FitnessCenter.Domain.Migrations
+namespace FitnessCenter.DAL.Migrations
 {
-    public partial class intitalmigration : Migration
+    public partial class initialConfiguration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
