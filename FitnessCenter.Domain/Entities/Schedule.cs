@@ -8,12 +8,8 @@ namespace FitnessCenter.Domain.Entities
 {
         public class Schedule
         {
-            public Schedule()
-            {
-                Registration = new HashSet<Registration>();
-            }
             [Key]
-            public int ScheduleID { get; set; }
+            public int ID { get; set; }
             [ForeignKey("FitnessClass")]
             public int ClassID { get; set; }
             [Required]
@@ -25,7 +21,7 @@ namespace FitnessCenter.Domain.Entities
             [Required]
             public int Capacity { get; set; }
             [Required]
-            public Status Status { get; set; }
+            public Status Status { get; set; } 
             public virtual FitnessClass FitnessClass { get; set; }
             public virtual ICollection<Registration> Registration { get; set; }
         }

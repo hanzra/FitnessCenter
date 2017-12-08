@@ -17,7 +17,6 @@ namespace FitnessCenter.Domain.Entities
         public int WaitNumber { get; set; }
         public DateTime DateTime { get; set; }
         public RegisrtationStatus Status { get; set; }
-        [Required]
         public virtual Schedule Schedule { get; set; }
         public virtual AppUser AppUser { get; set; }
     }

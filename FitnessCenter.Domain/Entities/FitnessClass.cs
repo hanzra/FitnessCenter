@@ -7,13 +7,8 @@ namespace FitnessCenter.Domain.Entities
 {
     public class FitnessClass
     {
-        public FitnessClass()
-        {
-            schedule = new List<Schedule>();
-        }
         [Key]
-        [Required]
-        public int ClassID { get; set; }
+        public int ID { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

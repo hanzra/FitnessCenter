@@ -12,9 +12,10 @@ using System;
 namespace FitnessCenter.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20171206031135_changestokeys")]
+    partial class changestokeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +24,7 @@ namespace FitnessCenter.Domain.Migrations
 
             modelBuilder.Entity("FitnessCenter.Domain.Entities.FitnessClass", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ClassID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description")
@@ -34,7 +35,7 @@ namespace FitnessCenter.Domain.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.HasKey("ID");
+                    b.HasKey("ClassID");
 
                     b.ToTable("FitnessClass");
                 });
@@ -122,24 +123,24 @@ namespace FitnessCenter.Domain.Migrations
 
             modelBuilder.Entity("FitnessCenter.Domain.Entities.Schedule", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ScheduleID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Capacity");
-
-                    b.Property<int>("ClassID");
 
                     b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<int?>("FitnessClassClassID");
+
                     b.Property<DateTime>("StartTime");
 
                     b.Property<int>("Status");
 
-                    b.HasKey("ID");
+                    b.HasKey("ScheduleID");
 
-                    b.HasIndex("ClassID");
+                    b.HasIndex("FitnessClassClassID");
 
                     b.ToTable("Schedule");
                 });
@@ -268,8 +269,7 @@ namespace FitnessCenter.Domain.Migrations
                 {
                     b.HasOne("FitnessCenter.Domain.Entities.FitnessClass", "FitnessClass")
                         .WithMany("schedule")
-                        .HasForeignKey("ClassID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("FitnessClassClassID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
