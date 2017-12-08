@@ -12,8 +12,8 @@ using System;
 namespace FitnessCenter.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20171207200755_initialConfiguration")]
-    partial class initialConfiguration
+    [Migration("20171208042348_InitialConfiguration")]
+    partial class InitialConfiguration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace FitnessCenter.DAL.Migrations
 
             modelBuilder.Entity("FitnessCenter.Domain.Entities.FitnessClass", b =>
                 {
-                    b.Property<int>("ClassID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description")
@@ -35,7 +35,7 @@ namespace FitnessCenter.DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.HasKey("ClassID");
+                    b.HasKey("ID");
 
                     b.ToTable("FitnessClass");
                 });
@@ -123,7 +123,7 @@ namespace FitnessCenter.DAL.Migrations
 
             modelBuilder.Entity("FitnessCenter.Domain.Entities.Schedule", b =>
                 {
-                    b.Property<int>("ScheduleID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Capacity");
@@ -138,7 +138,7 @@ namespace FitnessCenter.DAL.Migrations
 
                     b.Property<int>("Status");
 
-                    b.HasKey("ScheduleID");
+                    b.HasKey("ID");
 
                     b.HasIndex("ClassID");
 

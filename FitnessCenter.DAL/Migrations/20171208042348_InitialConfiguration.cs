@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FitnessCenter.DAL.Migrations
 {
-    public partial class initialConfiguration : Migration
+    public partial class InitialConfiguration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace FitnessCenter.DAL.Migrations
                 name: "FitnessClass",
                 columns: table => new
                 {
-                    ClassID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: false),
                     Instructor = table.Column<string>(nullable: true),
@@ -62,7 +62,7 @@ namespace FitnessCenter.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FitnessClass", x => x.ClassID);
+                    table.PrimaryKey("PK_FitnessClass", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,7 +175,7 @@ namespace FitnessCenter.DAL.Migrations
                 name: "Schedule",
                 columns: table => new
                 {
-                    ScheduleID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Capacity = table.Column<int>(nullable: false),
                     ClassID = table.Column<int>(nullable: false),
@@ -186,12 +186,12 @@ namespace FitnessCenter.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Schedule", x => x.ScheduleID);
+                    table.PrimaryKey("PK_Schedule", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Schedule_FitnessClass_ClassID",
                         column: x => x.ClassID,
                         principalTable: "FitnessClass",
-                        principalColumn: "ClassID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -214,7 +214,7 @@ namespace FitnessCenter.DAL.Migrations
                         name: "FK_Registration_Schedule_ScheduleID",
                         column: x => x.ScheduleID,
                         principalTable: "Schedule",
-                        principalColumn: "ScheduleID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Registration_AspNetUsers_UserID",
