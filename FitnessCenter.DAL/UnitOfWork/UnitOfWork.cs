@@ -7,6 +7,6 @@ namespace FitnessCenter.DAL.UnitOfWork
 {
     class UnitOfWork
     {
-        private readonly ApplicationDBContext
+    //    private readonly ApplicationDBContext
     }
 }
