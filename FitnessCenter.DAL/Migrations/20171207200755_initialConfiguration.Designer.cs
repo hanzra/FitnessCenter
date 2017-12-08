@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace FitnessCenter.Domain.Migrations
+namespace FitnessCenter.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20171205154232_intitalmigration")]
-    partial class intitalmigration
+    [Migration("20171207200755_initialConfiguration")]
+    partial class initialConfiguration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace FitnessCenter.Domain.Migrations
+namespace FitnessCenter.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
     partial class ApplicationDBContextModelSnapshot : ModelSnapshot
