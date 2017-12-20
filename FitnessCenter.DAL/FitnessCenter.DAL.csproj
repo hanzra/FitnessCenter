@@ -22,8 +22,4 @@
     <ProjectReference Include="..\FitnessCenter.Domain\FitnessCenter.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

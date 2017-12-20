@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using FitnessCenter.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FitnessCenter.Domain.Repositories;
+using FitnessCenter.Domain;
+using FitnessCenter.DAL.UnitOfWork;
 
 namespace FitnessCenter.Web
 {
@@ -28,6 +31,8 @@ namespace FitnessCenter.Web
         {
             services.AddDbContext<ApplicationDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddIdentity<AppUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDBContext>()
