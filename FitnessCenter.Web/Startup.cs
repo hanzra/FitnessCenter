@@ -34,7 +34,7 @@ namespace FitnessCenter.Web
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            services.AddIdentity<AppUser, IdentityRole>()
+            services.AddIdentity<AppUser, AppRole>()
             .AddEntityFrameworkStores<ApplicationDBContext>()
             .AddDefaultTokenProviders();
 
