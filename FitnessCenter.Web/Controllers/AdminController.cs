@@ -8,8 +8,7 @@ using FitnessCenter.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessCenter.Web.Controllers
-{
-    
+{    
     [Authorize]
     public class AdminController : Controller
     {
