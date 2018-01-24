@@ -64,9 +64,16 @@ namespace FitnessCenter.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()
         {
-            await _signInManager.SignOutAsync();
-            
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            if (ModelState.IsValid)
+            {
+                await _signInManager.SignOutAsync();
+
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            else
+            {
+                return RedirectToAction("Users", "Account");
+            }
         }
 
         #endregion
