@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FitnessCenter.Domain;
 using FitnessCenter.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessCenter.Web.Controllers
 {
+    
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

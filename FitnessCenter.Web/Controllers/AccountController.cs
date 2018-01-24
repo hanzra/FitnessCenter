@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using FitnessCenter.Domain.Entities.Identity;
 using FitnessCenter.Domain.ViewModel.Account;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessCenter.Web.Controllers
 {
@@ -22,6 +23,53 @@ namespace FitnessCenter.Web.Controllers
             _roleManager = roleManager;
             _signInManager = signInManager;
         }
+
+        #region Authentication
+
+
+        [HttpGet]
+        public IActionResult Login(string returnUrl = "")
+        {
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(model);
+        }
+    
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email,
+                    model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {                    
+                    return RedirectToLocal(returnUrl);
+                }
+
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        #endregion
 
         #region user management
 
@@ -51,6 +99,7 @@ namespace FitnessCenter.Web.Controllers
             return PartialView("_AddUser", model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddUser(UserViewModel model)
         {
@@ -77,7 +126,7 @@ namespace FitnessCenter.Web.Controllers
                     }
                 }
             }
-            return View(model);
+            return View("_AddUser", model);
         }
 
         #endregion 
@@ -130,6 +179,30 @@ namespace FitnessCenter.Web.Controllers
                 }
             }
             return View(model);
+        }
+        #endregion
+
+        #region helper Functions
+
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
         }
         #endregion
     }
