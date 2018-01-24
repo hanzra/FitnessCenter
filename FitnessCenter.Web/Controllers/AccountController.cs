@@ -26,7 +26,6 @@ namespace FitnessCenter.Web.Controllers
 
         #region Authentication
 
-
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
         {
@@ -56,7 +55,6 @@ namespace FitnessCenter.Web.Controllers
                     return View(model);
                 }
             }
-
             return View(model);
         }
 
@@ -152,6 +150,7 @@ namespace FitnessCenter.Web.Controllers
             }).ToList();
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {
@@ -168,6 +167,7 @@ namespace FitnessCenter.Web.Controllers
             }
             return PartialView("_AddEditApplicationRole", model);
         }
+
         [HttpPost]
         public async Task<IActionResult> AddEditApplicationRole(string id, AppRoleViewModel model)
         {
@@ -190,8 +190,6 @@ namespace FitnessCenter.Web.Controllers
         #endregion
 
         #region helper Functions
-
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
