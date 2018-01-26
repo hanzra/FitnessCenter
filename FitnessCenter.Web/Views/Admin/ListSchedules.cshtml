@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ScheduleListViewModel>
+
+    <!DOCTYPE html>
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <div class="panel panel-default col-md-8 col-md-offset-2 top-buffer">
+        <div class="panel-heading">
+            <h2>Classes</h2>
+        </div>
+
+        <div class="panel-body col-md-4 top-buffer">
+            <table class="table table-striped">
+                @if (Model.Count() == 0)
+            {
+                    <tr><td colspan="3">No Roles Available, Please click create button to create new role</td></tr>
+                }
+                else
+                {
+                    <tr><th>ID</th><th>Nme</th><th>Instructor</th><th>Date</th><th>Start Time</th><th>End Time</th><th>Capacity</th><th>Status</th></tr>
+
+                    foreach (var schedule in Model)
+                    {
+                    <tr>
+                        <td>@schedule.Schedue.ID</td>
+                        <td>@schedule.FitnessClass.Name</td>
+                        <td>@schedule.FitnessClass.Instructor</td>
+                        <td>@schedule.Schedue.Date</td>
+                        <td>@schedule.Schedue.StartTime</td>
+                        <td>@schedule.Schedue.EndTime</td>
+                        <td>@schedule.Schedue.Capacity</td>
+                        <td>@schedule.Schedue.Status</td>
+                        <td>
+                            <a id="editClass" data-toggle="modal" asp-action="AddEditSchedule" asp-route-id="@schedule.Schedue.ID" class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteClass" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@schedule.Schedue.ID"  class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                }
+            </table>
+            @Html.ActionLink("Create", "AddEditSchedule", null, new { @class = "btn btn-primary" })
+
+        </div>
+    </div>
+

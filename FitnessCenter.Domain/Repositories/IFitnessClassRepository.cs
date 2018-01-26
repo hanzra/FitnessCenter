@@ -12,6 +12,6 @@ namespace FitnessCenter.Domain.Repositories
         void RemoveFitnessClass(FitnessClass fitnessClass);
         IEnumerable<FitnessClass> AllFitnessClasses();
         FitnessClass GetFitnessClassByID(int id);
-        FitnessClass UpdateFitnessClass(FitnessClass fitnessclass);
+        void UpdateFitnessClass(FitnessClass fitnessclass);
     }
 }

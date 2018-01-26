@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,6 +12,7 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
+
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
@@ -36,6 +39,18 @@
                 </ul>
             </div>
         </div>
+        @if (SignInManager.IsSignedIn(User))
+        {                        
+            <form method="post" asp-controller="Account" asp-action="LogOut">
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Logout" />
+            </form>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Login">Login</a>            
+        }
+        
     </nav>
     <div class="container body-content">
         @RenderBody()
@@ -46,6 +61,7 @@
     </div>
 
     <environment include="Development">
+        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>

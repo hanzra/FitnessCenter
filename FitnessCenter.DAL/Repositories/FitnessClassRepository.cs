@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using FitnessCenter.Domain.Entities;
 using FitnessCenter.Domain.Entities.Infrastructure;
+using System.Linq;
 
 namespace FitnessCenter.DAL.Repositories
 {
@@ -23,14 +24,12 @@ namespace FitnessCenter.DAL.Repositories
 
         public IEnumerable<FitnessClass> AllFitnessClasses()
         {
-            return _context
-                 .FitnessClass;
-                
+            return _context.FitnessClass;                
         }
 
         public FitnessClass GetFitnessClassByID(int id)
         {
-            throw new NotImplementedException();
+            return _context.FitnessClass.Where(x=>x.ID == id).FirstOrDefault();
         }
 
         public void RemoveFitnessClass(FitnessClass fitnessClass)
@@ -38,9 +37,12 @@ namespace FitnessCenter.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public FitnessClass UpdateFitnessClass(FitnessClass fitnessclass)
+        public void UpdateFitnessClass(FitnessClass updatedFitnessClass)
         {
-            throw new NotImplementedException();
+            var fitnessClass = _context.FitnessClass.Where(x=>x.ID == updatedFitnessClass.ID).FirstOrDefault();
+            fitnessClass.Name = updatedFitnessClass.Name;
+            fitnessClass.Instructor = updatedFitnessClass.Instructor;
+            fitnessClass.Description = updatedFitnessClass.Description;
         }
     }
 }

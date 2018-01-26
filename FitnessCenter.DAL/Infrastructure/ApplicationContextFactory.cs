@@ -12,13 +12,13 @@ namespace FitnessCenter.Domain.Infrastructure
 {
     public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDBContext>
     {
-
         public ApplicationDBContext CreateDbContext(string[] args)
         {
+
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                       .SetBasePath(Directory.GetCurrentDirectory())
-                       .AddJsonFile("appsettings.json")
-                       .Build();
+                           .SetBasePath(Directory.GetCurrentDirectory())
+                           .AddJsonFile("appsettings.json")
+                           .Build();
 
             var builder = new DbContextOptionsBuilder<ApplicationDBContext>();
 
@@ -28,5 +28,7 @@ namespace FitnessCenter.Domain.Infrastructure
 
             return new ApplicationDBContext(builder.Options);
         }
+
+
     }
 }
