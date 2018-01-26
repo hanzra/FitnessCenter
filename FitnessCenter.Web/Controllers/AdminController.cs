@@ -11,7 +11,7 @@ using FitnessCenter.Domain.ViewModel.Admin;
 
 namespace FitnessCenter.Web.Controllers
 {    
-    [Authorize]
+    [Authorize(Roles = "Admin"]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -85,13 +85,13 @@ namespace FitnessCenter.Web.Controllers
         [HttpGet]
         public IActionResult AddEditSchedule(int id = 0)
         {
-            var classes = _unitOfWork.FitnessClass.AllFitnessClasses();
-
+            var classeList = _unitOfWork.FitnessClass.AllFitnessClasses();
+            var fitnessClasses = new List<SelectListItem>(classeList.Select(y => new SelectListItem { Text = y.Name, Value = y.ID.ToString() }));
             if (id == 0)
             {
                 return View(new ScheduleViewModel {
-                    Schedue = new Schedule(),
-                    FitnessClass = classes
+                    Schedule = new Schedule(),
+                    Classes = fitnessClasses
                 });
             }
             else
@@ -102,20 +102,20 @@ namespace FitnessCenter.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddEditSchedule(Schedule schedule)
+        public IActionResult AddEditSchedule(ScheduleViewModel model)
         {
-            var existSchdule = _unitOfWork.Schedule.GetSchedulesById(schedule.ID) == null ? false: true;
+            var existSchdule = _unitOfWork.Schedule.GetSchedulesById(model.Schedule.ID) == null ? false: true;
 
             if (!existSchdule)
             {
-                _unitOfWork.Schedule.AddSchedule(schedule);
+                _unitOfWork.Schedule.AddSchedule(model.Schedule);
                 _unitOfWork.Complete();
 
-                return View("ListSchedules");
+                return RedirectToAction("ListSchedules");
             }
             else
             {
-                return View("ListSchedules");
+                return RedirectToAction("ListSchedules");
             }
         }
 
