@@ -12,11 +12,15 @@ namespace FitnessCenter.DAL.UnitOfWork
     {
         private readonly ApplicationDBContext _context;
         public IFitnessClassRepository FitnessClass { get; private set; }
+        public IScheduleRepository Schedule { get; private set; }
+        public IRegistrationRepository Register { get; private set; }
 
         public UnitOfWork(ApplicationDBContext context)
         {
             _context = context;
             FitnessClass = new FitnessClassRepository(_context);
+            Schedule = new ScheduleRepository(_context);
+            Register = new RegistrationRepository(_context);
         }
 
         public void Complete()

@@ -7,30 +7,12 @@
 
     <div class="panel panel-default col-md-8 col-md-offset-2 top-buffer">
         <div class="panel-heading">
-            <h2>Classes</h2>
+            <h2>Admin Portal</h2>
         </div>
-
-        <div class="panel-body col-md-4 top-buffer">
-            <table class="table table-striped">
-                @if (Model.Count() == 0)
-            {
-                    <tr><td colspan="3">No Roles Available, Please click create button to create new role</td></tr>
-                }
-                else
-                {
-                    <tr><th>ID</th><th>Nme</th><th>Instructor</th></tr>
-
-                    foreach (var Class in Model)
-                    {
-                        <tr>
-                            <td>@Class.ID</td>
-                            <td>@Class.Name</td>
-                            <td>@Class.Instructor</td>
-                        </tr>
-                    }
-                }
-            </table>
-            @Html.ActionLink("Create", "AddClass", null, new { @class = "btn btn-primary" })
-
-        </div>
+        <a id="editClass" data-toggle="modal" asp-action="ListClasses" class="btn btn-info">
+            <i class="glyphicon glyphicon-pencil"></i>  Classes
+        </a>
+        <a id="editClass" data-toggle="modal" asp-action="ListSchedules" class="btn btn-info">
+            <i class="glyphicon glyphicon-pencil"></i>  Schedules
+        </a>
     </div>

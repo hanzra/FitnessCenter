@@ -1,0 +1,53 @@
+﻿@model ScheduleViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+
+<div class="panel panel-default col-md-8 col-md-offset-2 top-buffer">
+    <div class="panel-heading">
+        <h2>Create Class</h2>
+    </div>
+    <div class="panel-body col-md-4 top-buffer">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x => x.ID)
+            <div class="form-group">
+                @Html.Label("Class Name")
+                @Html.DropDownListFor(x=>x.Schedue.ClassID, Model.FitnessClass, "Please Select")                
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Date)
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.StartTime)
+                @Html.TextBoxFor(x => x.StartTime, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.EndTime)
+                @Html.TextBoxFor(x => x.EndTime, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Capacity)
+                @Html.TextBoxFor(x => x.Capacity, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.Status, Html.GetEnumSelectList<Status>(), "Please select")
+                @Html.TextBoxFor(x => x.Status, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }S
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>
