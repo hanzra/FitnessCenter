@@ -6,6 +6,7 @@ using FitnessCenter.Domain.Entities;
 using FitnessCenter.Domain.Entities.Infrastructure;
 using FitnessCenter.Domain.ViewModel.Admin;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessCenter.DAL.Repositories
 {
@@ -25,20 +26,21 @@ namespace FitnessCenter.DAL.Repositories
 
         public IEnumerable<ScheduleListViewModel> GetAllSchedules()
         {
-            return  (from s in _context.Schedule
-                         join fc in _context.FitnessClass
-                         on s.ClassID equals fc.ID
-                         select new ScheduleListViewModel
-                         {
-                           Schedue = s,
-                           FitnessClass = fc
+            return (from s in _context.Schedule
+                    join fc in _context.FitnessClass
+                    on s.ClassID equals fc.ID
+                    select new ScheduleListViewModel
+                    {
+                        Schedue = s,
+                        FitnessClass = fc,
+                        AvailableSeats = s.Capacity - s.Registration.Count
                          }).ToList();
             
         }
 
         public Schedule GetSchedulesById(int id)
         {
-            return _context.Schedule.Where(x => x.ID == id).FirstOrDefault();
+            return _context.Schedule.Include(x=>x.FitnessClass).Where(x => x.ID == id).FirstOrDefault();
         }
 
         public void RemoveSchedule(Schedule schedule)

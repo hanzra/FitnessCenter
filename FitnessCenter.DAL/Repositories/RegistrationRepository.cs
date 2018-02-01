@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using FitnessCenter.Domain.Entities;
 using FitnessCenter.Domain.Entities.Infrastructure;
+using System.Linq;
 
 namespace FitnessCenter.DAL.Repositories
 {
@@ -17,12 +18,17 @@ namespace FitnessCenter.DAL.Repositories
         }
         public void AddRegistration(Registration registration)
         {
-            throw new NotImplementedException();
+            _context.Add(registration);
         }
 
         public IEnumerable<Registration> GetAllRegistrations()
         {
-            throw new NotImplementedException();
+            return _context.Registration;
+        }
+
+        public IEnumerable<Registration> GetRegistrationsByUser(string userId)
+        {
+            return _context.Registration.Where(x => x.UserID == userId);
         }
 
         public Registration GetRegistrationById(int id)

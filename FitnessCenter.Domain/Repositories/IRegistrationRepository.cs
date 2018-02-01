@@ -10,6 +10,7 @@ namespace FitnessCenter.Domain.Repositories
         void AddRegistration(Registration registration);
         void RemoveRegistration(Registration fitnessClass);
         IEnumerable<Registration> GetAllRegistrations();
+        IEnumerable<Registration> GetRegistrationsByUser(string userId);
         Registration GetRegistrationById(int id);
         Registration UpdateRegistration(Registration fitnessclass);
     }

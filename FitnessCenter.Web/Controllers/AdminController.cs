@@ -11,7 +11,7 @@ using FitnessCenter.Domain.ViewModel.Admin;
 
 namespace FitnessCenter.Web.Controllers
 {    
-    [Authorize(Roles = "Admin"]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

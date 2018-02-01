@@ -5,11 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FitnessCenter.Web.Models;
+using FitnessCenter.Domain;
 
 namespace FitnessCenter.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+
         public IActionResult Index()
         {
             return View();
@@ -22,11 +32,10 @@ namespace FitnessCenter.Web.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Schedules()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var schedules = _unitOfWork.Schedule.GetAllSchedules();
+            return View(schedules);
         }
 
         public IActionResult Error()

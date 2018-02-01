@@ -24,6 +24,7 @@ namespace FitnessCenter.Domain.Entities
     public enum RegisrtationStatus
     {
         Confirmed,
-        Waiting
+        Waiting,
+        Cancel
     }
 }

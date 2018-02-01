@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Registration>
+
+    <!DOCTYPE html>
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <div class="panel panel-default col-md-8 col-md-offset-2 top-buffer">
+        <div class="panel-heading">
+            <h2>Registration</h2>
+        </div>
+
+        <div class="panel-body col-md-4 top-buffer">
+            <table class="table table-striped">
+                @if (Model.Count() == 0)
+            {
+                    <tr><td colspan="3">No Registration Available, Please click create button to create new role</td></tr>
+                }
+                else
+                {
+                    <tr><th>ClassName</th><th>Date</th><th>Status</th><th>WaitListNumber</th></tr>
+
+                    foreach (var registration in Model)
+                    {
+                    <tr>
+                        <td>@registration.Schedule.FitnessClass.Name</td>
+                        <td>@registration.Schedule.Date</td>
+                        <td>@registration.Status</td>
+                        <td>@registration.WaitNumber</td>
+                    </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+

@@ -25,6 +25,8 @@ namespace FitnessCenter.Domain.Entities
             public virtual FitnessClass FitnessClass { get; set; }
             public virtual ICollection<Registration> Registration { get; set; }
         }
+    
+
         public enum Status
         {
             Active,

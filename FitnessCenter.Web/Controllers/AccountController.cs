@@ -189,6 +189,12 @@ namespace FitnessCenter.Web.Controllers
         }
         #endregion
 
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         #region helper Functions
         private void AddErrors(IdentityResult result)
         {
