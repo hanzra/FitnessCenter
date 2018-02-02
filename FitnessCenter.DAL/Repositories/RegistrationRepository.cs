@@ -5,6 +5,7 @@ using System.Text;
 using FitnessCenter.Domain.Entities;
 using FitnessCenter.Domain.Entities.Infrastructure;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessCenter.DAL.Repositories
 {
@@ -28,7 +29,7 @@ namespace FitnessCenter.DAL.Repositories
 
         public IEnumerable<Registration> GetRegistrationsByUser(string userId)
         {
-            return _context.Registration.Where(x => x.UserID == userId);
+            return _context.Registration.Include(x=>x.Schedule).Include(y=>y.Schedule.FitnessClass).Where(x => x.UserID == userId);
         }
 
         public Registration GetRegistrationById(int id)

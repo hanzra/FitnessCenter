@@ -97,7 +97,11 @@ namespace FitnessCenter.Web.Controllers
             else
             {
                 var Schedule = _unitOfWork.Schedule.GetSchedulesById(id);
-                return View(Schedule);
+                return View(new ScheduleViewModel
+                {
+                    Schedule = Schedule,
+                    Classes = fitnessClasses
+                });
             }            
         }
 

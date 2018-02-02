@@ -34,13 +34,16 @@ namespace FitnessCenter.DAL.Repositories
                         Schedue = s,
                         FitnessClass = fc,
                         AvailableSeats = s.Capacity - s.Registration.Count
-                         }).ToList();
+                    } ).ToList();
             
         }
 
         public Schedule GetSchedulesById(int id)
         {
-            return _context.Schedule.Include(x=>x.FitnessClass).Where(x => x.ID == id).FirstOrDefault();
+            return _context.Schedule
+                .Include(x=>x.FitnessClass)
+                .Include(y=>y.Registration).ThenInclude(z => z.AppUser)
+                .Where(x => x.ID == id).FirstOrDefault();
         }
 
         public void RemoveSchedule(Schedule schedule)

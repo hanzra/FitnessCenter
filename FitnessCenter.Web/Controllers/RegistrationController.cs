@@ -25,8 +25,8 @@ namespace FitnessCenter.Web.Controllers
         public async Task<IActionResult> ListRegistrations()
         {
             var user = await GetCurrentUserAsync();
-            _unitOfWork.Register.GetRegistrationsByUser(user.Id);
-            return View();
+            var registrations = _unitOfWork.Register.GetRegistrationsByUser(user.Id);
+            return View(registrations);
         }
 
         [HttpGet]
@@ -66,11 +66,14 @@ namespace FitnessCenter.Web.Controllers
                 _unitOfWork.Register.AddRegistration(newRegistration);
                 _unitOfWork.Complete();
 
-                RedirectToAction("ListRegistrations");
-        
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ListRegistrations");
         }
 
+        [HttpPost]
+        public IActionResult CancelRegistration()
+        {
+            return View();
+        }
         private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
     }
 }

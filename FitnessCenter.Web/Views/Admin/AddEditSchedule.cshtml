@@ -36,6 +36,41 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         }
     </div>
+
+    <div class="panel-body col-md-4 top-buffer">
+        <table class="table table-striped">
+            @if (Model.Schedule.Registration.Count() == 0)
+            {
+                <tr><td colspan="3">No one has registered for this schedule yet</td></tr>
+            }
+            else
+            {
+                <tr><th>First Name</th><th>Last Name</th><th>Status</th><th>Wait Number</th></tr>
+
+                foreach (var registration in Model.Schedule.Registration)
+                {
+                    <tr>
+                        <td>@registration.AppUser.FirstName</td>
+                        <td>@registration.AppUser.LastName</td>
+                        <td>@registration.Status</td>
+                        @if (registration.Status != RegisrtationStatus.Waiting)
+                        {
+                            <td>Not Applicable</td>
+                        }
+                        <td>@registration.WaitNumber</td>
+                        <td>
+                            <a id="cancelRegistration" data-toggle="modal" asp-action="CancelRegistration" asp-controller="Registration" asp-route-id="@registration.RegistrationID" class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Cancel
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+        @Html.ActionLink("Create", "AddEditSchedule", null, new { @class = "btn btn-primary" })
+
+    </div>
+
 </div>
 @section Scripts{ 
 <script>
